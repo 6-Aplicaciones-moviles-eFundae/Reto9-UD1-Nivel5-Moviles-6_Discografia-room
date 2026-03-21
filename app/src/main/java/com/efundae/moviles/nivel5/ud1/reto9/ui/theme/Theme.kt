@@ -1,4 +1,4 @@
-package com.pmdm.proyectobase2425.ui.theme
+package com.efundae.moviles.nivel5.ud1.reto9.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -33,7 +33,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun ProyectoBaseTheme(
+fun DiscografiaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

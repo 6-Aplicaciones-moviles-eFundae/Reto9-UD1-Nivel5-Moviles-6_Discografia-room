@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.settings.SettingsViewModel
 import com.efundae.moviles.nivel5.ud1.reto9.ui.navigation.NavHostPrincipal
-import com.pmdm.proyectobase2425.ui.theme.ProyectoBaseTheme
+import com.efundae.moviles.nivel5.ud1.reto9.ui.theme.DiscografiaTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsViewModel: SettingsViewModel by viewModels()
             val isDarkTheme by settingsViewModel.isDarkTheme.collectAsState()
-            ProyectoBaseTheme {
+            DiscografiaTheme {
                 NavHostPrincipal(
                     isDarkTheme = isDarkTheme,
                     onThemeChange = { settingsViewModel.setTheme(it) }

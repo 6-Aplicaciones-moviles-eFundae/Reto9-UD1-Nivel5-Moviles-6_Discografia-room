@@ -27,12 +27,12 @@
         android:label="Discografía"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Proyectobase2425"
+        android:theme="@style/Theme.Discografia"
         tools:targetApi="31">
         <activity
             android:name="com.efundae.moviles.nivel5.ud1.reto9.ui.views.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Proyectobase2425">
+            android:theme="@style/Theme.Discografia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
