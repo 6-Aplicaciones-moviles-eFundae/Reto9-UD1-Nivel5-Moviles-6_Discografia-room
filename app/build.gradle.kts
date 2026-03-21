@@ -9,15 +9,16 @@ plugins {
 }
 
 android {
-    namespace = "com.pmdm.proyectobase2425"
+    namespace = "com.efundae.moviles.nivel5.ud1.reto9"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pmdm.proyectobase2425"
+        applicationId = "com.efundae.moviles.nivel5.ud1.reto9"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -52,6 +53,10 @@ android {
 
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,7 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    implementation(libs.androidx.compose.material.icons.extended)
 
     implementation(libs.pmdm.ies.balmis.components)
     implementation(libs.pmdm.ies.balmis.utilities)
@@ -81,7 +86,7 @@ dependencies {
     implementation(platform(libs.com.squareup.okhttp3.okhttp.bom))
     implementation(libs.com.squareup.okhttp3.okhttp)
     implementation(libs.com.squareup.okhttp3.logging.interceptor)
-	implementation(libs.kolinx.serializarion.json)
+	implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
