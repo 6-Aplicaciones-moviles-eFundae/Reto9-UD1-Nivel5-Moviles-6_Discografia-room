@@ -1,4 +1,4 @@
-package com.pmdm.proyectobase2425.ui.theme
+package com.efundae.moviles.nivel5.ud1.reto9.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
