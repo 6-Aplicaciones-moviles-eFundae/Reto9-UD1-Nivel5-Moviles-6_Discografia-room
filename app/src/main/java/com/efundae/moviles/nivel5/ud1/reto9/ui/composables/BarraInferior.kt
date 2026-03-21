@@ -11,7 +11,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.efundae.moviles.nivel5.ud1.reto9.data.OpcionBaraInferior
+import com.efundae.moviles.nivel5.ud1.reto9.data.OpcionBarraInferior
 
 @Composable
 fun BarraInferior(
@@ -20,13 +20,13 @@ fun BarraInferior(
 ) {
     val opcionesBarraInferior = remember {
         listOf(
-            OpcionBaraInferior(
+            OpcionBarraInferior(
                 id = 0,
                 titulo = "Albumes",
                 iconoPorDefecto = Icons.Outlined.Album,
                 iconoSeleccionado = Icons.Filled.Album
             ),
-            OpcionBaraInferior(
+            OpcionBarraInferior(
                 id = 1,
                 titulo = "Canciones",
                 iconoPorDefecto = Icons.Outlined.MusicNote,

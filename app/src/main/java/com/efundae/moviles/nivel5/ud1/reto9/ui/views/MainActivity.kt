@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.settings.SettingsViewModel
 import com.efundae.moviles.nivel5.ud1.reto9.ui.navigation.NavHostPrincipal
 import com.efundae.moviles.nivel5.ud1.reto9.ui.theme.DiscografiaTheme
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val settingsViewModel: SettingsViewModel by viewModels()
+            val settingsViewModel = hiltViewModel<SettingsViewModel>()
             val isDarkTheme by settingsViewModel.isDarkTheme.collectAsState()
             DiscografiaTheme {
                 NavHostPrincipal(
