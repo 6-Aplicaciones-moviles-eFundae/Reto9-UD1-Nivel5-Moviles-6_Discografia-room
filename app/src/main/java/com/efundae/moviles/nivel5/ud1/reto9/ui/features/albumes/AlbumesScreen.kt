@@ -9,13 +9,12 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun AlbumesScreen(
+    pantalla: Int,
     listaAlbumes: List<AlbumUiState>,
     onThemeChange: (Boolean) -> Unit,
     isDarkTheme: Boolean
 ) {
-    Scaffold() { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
-            Text("Hola, Ainara")
-        }
+    Column {
+        Text("Álbumes")
     }
 }

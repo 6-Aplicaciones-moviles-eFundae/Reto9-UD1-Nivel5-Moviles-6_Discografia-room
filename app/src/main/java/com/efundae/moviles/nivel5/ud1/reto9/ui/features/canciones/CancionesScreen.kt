@@ -9,13 +9,12 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun CancionesScreen(
+    pantalla: Int,
     listaCanciones: List<CancionUiState>,
     onThemeChange: (Boolean) -> Unit,
     isDarkTheme: Boolean
 ) {
-    Scaffold() { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
-            Text("Canciones")
-        }
+    Column() {
+        Text("Canciones")
     }
 }

@@ -16,6 +16,7 @@ fun NavGraphBuilder.albumesDestination(
 ) {
     composable<AlbumesRoute> {
         AlbumesScreen(
+            pantalla = 0,
             listaAlbumes = albumVM.listaAlbumes.value,
             isDarkTheme = isDarkTheme,
             onThemeChange = onThemeChange

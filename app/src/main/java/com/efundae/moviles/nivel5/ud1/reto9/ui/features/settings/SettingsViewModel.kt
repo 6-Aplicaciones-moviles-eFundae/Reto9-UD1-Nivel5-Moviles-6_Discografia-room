@@ -1,8 +1,8 @@
-package com.efundae.moviles.nivel4.ud3.reto7.ui.features.settings
+package com.efundae.moviles.nivel5.ud1.reto9.ui.features.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.efundae.moviles.nivel4.ud3.reto7.models.SettingsRepository
+import com.efundae.moviles.nivel5.ud1.reto9.models.repositories.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

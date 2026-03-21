@@ -7,16 +7,16 @@ import com.efundae.moviles.nivel5.ud1.reto9.ui.features.canciones.CancionesScree
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CancioneRoute(val id: Int)
+data object CancionesRoute
 
 fun NavGraphBuilder.cancionesDestination(
     cancionVM: CancionViewModel,
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit
 ) {
-    composable<CancioneRoute> { backStackEntry ->
-        val id = backStackEntry.arguments?.getInt("id")
+    composable<CancionesRoute> {
         CancionesScreen(
+            pantalla = 1,
             listaCanciones = cancionVM.listaCanciones.value,
             isDarkTheme = isDarkTheme,
             onThemeChange = onThemeChange

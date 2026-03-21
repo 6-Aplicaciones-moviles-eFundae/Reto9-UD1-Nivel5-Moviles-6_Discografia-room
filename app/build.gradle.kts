@@ -66,7 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation(libs.androidx.compose.material.icons.extended)
 
     implementation(libs.pmdm.ies.balmis.components)
     implementation(libs.pmdm.ies.balmis.utilities)
@@ -86,7 +86,7 @@ dependencies {
     implementation(platform(libs.com.squareup.okhttp3.okhttp.bom))
     implementation(libs.com.squareup.okhttp3.okhttp)
     implementation(libs.com.squareup.okhttp3.logging.interceptor)
-	implementation(libs.kolinx.serializarion.json)
+	implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
