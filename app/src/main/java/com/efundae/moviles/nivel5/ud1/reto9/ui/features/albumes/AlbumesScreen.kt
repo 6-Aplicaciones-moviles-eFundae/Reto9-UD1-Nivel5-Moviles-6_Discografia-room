@@ -1,4 +1,4 @@
-package com.efundae.moviles.nivel5.ud1.reto9.ui.features.x1
+package com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -8,9 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ScaffoldPrincipalScreen(
-    onIrPantallaB: (Int) -> Unit,
-    xVm: com.efundae.moviles.nivel5.ud1.reto9.ui.features.x1.XViewModel,
+fun AlbumesScreen(
+    listaAlbumes: List<AlbumUiState>,
     onThemeChange: (Boolean) -> Unit,
     isDarkTheme: Boolean
 ) {
