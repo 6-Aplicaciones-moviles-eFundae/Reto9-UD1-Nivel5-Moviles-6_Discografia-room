@@ -3,10 +3,7 @@ package com.efundae.moviles.nivel5.ud1.reto9.ui.navigation
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -19,6 +16,8 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior.BarraSuperiorAlbumes
+import com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior.BarraSuperiorCanciones
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BarraInferior
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BotonFlotante
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoInsertarAlbum
@@ -55,14 +54,20 @@ fun NavHostPrincipal(
     }
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Barra superior pendiente de hacer") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                ),
-                scrollBehavior = comportamientoAnteScroll
-            )
+            when (iOpcionNavegacionSeleccionada) {
+                0 -> BarraSuperiorAlbumes(
+                    isDarkTheme = isDarkTheme,
+                    onThemeChange = onThemeChange,
+                    comportamientoAnteScroll = comportamientoAnteScroll,
+                    hayAlbumSeleccionado = albumVM.albumSeleccionado == null
+                )
+                1 -> BarraSuperiorCanciones(
+                    isDarkTheme = isDarkTheme,
+                    onThemeChange = onThemeChange,
+                    comportamientoAnteScroll = comportamientoAnteScroll,
+                    hayCancionSeleccionada = cancionVM.cancionSeleccionada == null
+                )
+            }
         },
         bottomBar = {
             BarraInferior(
@@ -74,7 +79,9 @@ fun NavHostPrincipal(
             BotonFlotante(onMostrarDialogo = {
                 when (iOpcionNavegacionSeleccionada) {
                     0 -> onMostrarDialogoInsertarAlbum(it)
-                    1 -> { onMostrarDialogoInsertarCancion(it) }
+                    1 -> {
+                        onMostrarDialogoInsertarCancion(it)
+                    }
                 }
             })
         },

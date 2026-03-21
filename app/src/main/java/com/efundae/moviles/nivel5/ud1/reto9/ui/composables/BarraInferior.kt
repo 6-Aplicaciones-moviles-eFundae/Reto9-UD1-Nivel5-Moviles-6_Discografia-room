@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.outlined.Album
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -22,7 +23,7 @@ fun BarraInferior(
         listOf(
             OpcionBarraInferior(
                 id = 0,
-                titulo = "Albumes",
+                titulo = "Álbumes",
                 iconoPorDefecto = Icons.Outlined.Album,
                 iconoSeleccionado = Icons.Filled.Album
             ),
@@ -34,16 +35,19 @@ fun BarraInferior(
             )
         )
     }
-    NavigationBar {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.primaryContainer
+    ) {
         opcionesBarraInferior.forEachIndexed { index, opcion ->
             NavigationBarItem(
                 selected = index == iOpcionSeleccionada,
                 onClick = { onNavegarAPantalla(index) },
-                label = { Text(opcion.titulo) },
+                label = { Text(text = opcion.titulo, color = MaterialTheme.colorScheme.onPrimaryContainer) },
                 icon = {
                     Icon(
                         imageVector = if (iOpcionSeleccionada == index) opcion.iconoSeleccionado else opcion.iconoPorDefecto,
-                        contentDescription = opcion.titulo
+                        contentDescription = opcion.titulo,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             )
