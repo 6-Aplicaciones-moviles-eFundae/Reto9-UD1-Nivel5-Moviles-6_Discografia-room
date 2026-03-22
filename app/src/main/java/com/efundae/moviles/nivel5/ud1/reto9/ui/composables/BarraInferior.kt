@@ -47,7 +47,7 @@ fun BarraInferior(
                     Text(
                         text = opcion.titulo,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        fontWeight = if (iOpcionSeleccionada == index) FontWeight.Bold else FontWeight.Normal
+                        fontWeight = if (iOpcionSeleccionada == index) FontWeight.ExtraBold else FontWeight.Normal
                     )
                 },
                 icon = {

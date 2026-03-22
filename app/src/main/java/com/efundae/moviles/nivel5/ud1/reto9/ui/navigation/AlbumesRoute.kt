@@ -16,8 +16,10 @@ fun NavGraphBuilder.albumesDestination(
 ) {
     composable<AlbumesRoute> {
         val listaAlbumes by albumVM.listaAlbumes.collectAsStateWithLifecycle()
+        val albumSeleccionado by albumVM.albumSeleccionado.collectAsStateWithLifecycle()
         AlbumesScreen(
             listaAlbumes = listaAlbumes,
+            albumSeleccionado = albumSeleccionado,
             onAlbumEvent = albumVM::onAlbumEvent
         )
     }
