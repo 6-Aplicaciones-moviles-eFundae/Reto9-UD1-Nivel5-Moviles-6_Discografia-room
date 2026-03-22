@@ -1,4 +1,4 @@
-package com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior
+package com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode

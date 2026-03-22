@@ -1,5 +1,7 @@
 package com.efundae.moviles.nivel5.ud1.reto9.ui.navigation
 
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.canciones.CancionViewModel
@@ -10,16 +12,12 @@ import kotlinx.serialization.Serializable
 data object CancionesRoute
 
 fun NavGraphBuilder.cancionesDestination(
-    cancionVM: CancionViewModel,
-    isDarkTheme: Boolean,
-    onThemeChange: (Boolean) -> Unit
+    cancionVM: CancionViewModel
 ) {
     composable<CancionesRoute> {
+        val listaCanciones by cancionVM.listaCanciones.collectAsStateWithLifecycle()
         CancionesScreen(
-            pantalla = 1,
-            listaCanciones = cancionVM.listaCanciones.value,
-            isDarkTheme = isDarkTheme,
-            onThemeChange = onThemeChange
+            listaCanciones = listaCanciones,
         )
     }
 }

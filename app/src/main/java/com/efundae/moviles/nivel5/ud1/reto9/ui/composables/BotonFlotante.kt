@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,8 +14,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BotonFlotante(
-    onMostrarDialogo: (Boolean) -> Unit = {}
-){
+    onMostrarDialogo: (Boolean) -> Unit
+) {
     FloatingActionButton(
         modifier = Modifier.size(80.dp),
         onClick = { onMostrarDialogo(true) },
@@ -31,6 +32,6 @@ fun BotonFlotante(
 
 @Preview(showBackground = true)
 @Composable
-fun BotonFlotantePreview(){
-    BotonFlotante()
+fun BotonFlotantePreview() {
+    BotonFlotante(onMostrarDialogo = {})
 }
