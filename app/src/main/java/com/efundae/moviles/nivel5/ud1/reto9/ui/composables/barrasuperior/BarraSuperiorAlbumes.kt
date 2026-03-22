@@ -1,6 +1,7 @@
-package com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior
+package com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -14,6 +15,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes.AlbumEvent
+import com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes.AlbumUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -21,7 +24,8 @@ fun BarraSuperiorAlbumes(
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
     comportamientoAnteScroll: TopAppBarScrollBehavior,
-    hayAlbumSeleccionado: Boolean
+    albumSeleccionado: AlbumUiState?,
+    onAlbumEvent: (AlbumEvent) -> Unit
 ) {
     TopAppBar(
         title = { Text("Álbumes") },
@@ -31,7 +35,17 @@ fun BarraSuperiorAlbumes(
             titleContentColor = MaterialTheme.colorScheme.onPrimary
         ),
         actions = {
-            if (hayAlbumSeleccionado) {
+            if (albumSeleccionado != null) {
+                IconButton(
+                    onClick = { onAlbumEvent(AlbumEvent.OnGetAlbumById(null)) },
+                    content = {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Undo,
+                            contentDescription = "Deseleccionar",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                )
                 IconButton(
                     onClick = {},
                     content = {
@@ -43,7 +57,7 @@ fun BarraSuperiorAlbumes(
                     }
                 )
                 IconButton(
-                    onClick = {},
+                    onClick = { onAlbumEvent(AlbumEvent.OnDeleteAlbum(albumUiState = albumSeleccionado)) },
                     content = {
                         Icon(
                             imageVector = Icons.Filled.Delete,
@@ -52,8 +66,7 @@ fun BarraSuperiorAlbumes(
                         )
                     }
                 )
-            }
-            else {
+            } else {
                 IconButton(
                     onClick = { onThemeChange(!isDarkTheme) },
                     content = {

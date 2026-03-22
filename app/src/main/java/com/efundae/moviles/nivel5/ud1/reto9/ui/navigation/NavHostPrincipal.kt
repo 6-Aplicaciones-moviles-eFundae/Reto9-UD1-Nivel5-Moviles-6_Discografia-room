@@ -4,20 +4,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior.BarraSuperiorAlbumes
-import com.efundae.moviles.nivel5.ud1.reto9.ui.barrasuperior.BarraSuperiorCanciones
+import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior.BarraSuperiorAlbumes
+import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior.BarraSuperiorCanciones
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BarraInferior
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BotonFlotante
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoInsertarAlbum
@@ -36,6 +40,8 @@ fun NavHostPrincipal(
     val comportamientoAnteScroll = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val navController = rememberNavController()
     val entradaEnPilaDeNavegacionActuasState by navController.currentBackStackEntryAsState()
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
     val iOpcionNavegacionSeleccionada by remember {
         derivedStateOf {
             when {
@@ -52,6 +58,10 @@ fun NavHostPrincipal(
     val (mostrarDialogoInsertarCancion, onMostrarDialogoInsertarCancion) = remember {
         mutableStateOf(value = false)
     }
+
+    val albumSeleccionado by albumVM.albumSeleccionado.collectAsStateWithLifecycle()
+    val cancionSeleccionada by cancionVM.cancionSeleccionada.collectAsStateWithLifecycle()
+
     Scaffold(
         topBar = {
             when (iOpcionNavegacionSeleccionada) {
@@ -59,13 +69,15 @@ fun NavHostPrincipal(
                     isDarkTheme = isDarkTheme,
                     onThemeChange = onThemeChange,
                     comportamientoAnteScroll = comportamientoAnteScroll,
-                    hayAlbumSeleccionado = albumVM.albumSeleccionado == null
+                    albumSeleccionado = albumSeleccionado,
+                    onAlbumEvent = albumVM::onAlbumEvent
                 )
+
                 1 -> BarraSuperiorCanciones(
                     isDarkTheme = isDarkTheme,
                     onThemeChange = onThemeChange,
                     comportamientoAnteScroll = comportamientoAnteScroll,
-                    hayCancionSeleccionada = cancionVM.cancionSeleccionada == null
+                    hayCancionSeleccionada = cancionSeleccionada != null
                 )
             }
         },
@@ -76,19 +88,27 @@ fun NavHostPrincipal(
             )
         },
         floatingActionButton = {
-            BotonFlotante(onMostrarDialogo = {
-                when (iOpcionNavegacionSeleccionada) {
-                    0 -> onMostrarDialogoInsertarAlbum(it)
-                    1 -> {
-                        onMostrarDialogoInsertarCancion(it)
+            BotonFlotante(
+                onMostrarDialogo = {
+                    when (iOpcionNavegacionSeleccionada) {
+                        0 -> onMostrarDialogoInsertarAlbum(it)
+                        1 -> {
+                            onMostrarDialogoInsertarCancion(it)
+                        }
                     }
                 }
-            })
+            )
         },
-        floatingActionButtonPosition = FabPosition.End
+        floatingActionButtonPosition = FabPosition.End,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         if (mostrarDialogoInsertarAlbum) {
-            DialogoInsertarAlbum(onMostrarDialogoInsertarAlbum)
+            DialogoInsertarAlbum(
+                onMostrarDialogoInsertarAlbum,
+                albumVM::onAlbumEvent,
+                snackbarHostState,
+                scope
+            )
         }
         if (mostrarDialogoInsertarCancion) {
             DialogoInsertarCancion(onMostrarDialogoInsertarCancion)
@@ -99,14 +119,10 @@ fun NavHostPrincipal(
             modifier = Modifier.padding(paddingValues)
         ) {
             albumesDestination(
-                isDarkTheme = isDarkTheme,
-                albumVM = albumVM,
-                onThemeChange = onThemeChange
+                albumVM = albumVM
             )
             cancionesDestination(
-                cancionVM = cancionVM,
-                isDarkTheme = isDarkTheme,
-                onThemeChange = onThemeChange
+                cancionVM = cancionVM
             )
         }
     }

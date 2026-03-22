@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.font.FontWeight
 import com.efundae.moviles.nivel5.ud1.reto9.data.OpcionBarraInferior
 
 @Composable
@@ -42,7 +43,13 @@ fun BarraInferior(
             NavigationBarItem(
                 selected = index == iOpcionSeleccionada,
                 onClick = { onNavegarAPantalla(index) },
-                label = { Text(text = opcion.titulo, color = MaterialTheme.colorScheme.onPrimaryContainer) },
+                label = {
+                    Text(
+                        text = opcion.titulo,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        fontWeight = if (iOpcionSeleccionada == index) FontWeight.ExtraBold else FontWeight.Normal
+                    )
+                },
                 icon = {
                     Icon(
                         imageVector = if (iOpcionSeleccionada == index) opcion.iconoSeleccionado else opcion.iconoPorDefecto,

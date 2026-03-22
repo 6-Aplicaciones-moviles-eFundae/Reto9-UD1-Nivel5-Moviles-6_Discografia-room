@@ -41,9 +41,13 @@ class AlbumesViewModel @Inject constructor(
         }
     }
 
-    private fun getAlbum(albumId: Int) {
+    private fun getAlbum(albumId: Int?) {
         viewModelScope.launch {
-            _albumSeleccionado.value = repository.get(albumId).toAlbum().toAlbumUiState()
+            if (albumId == null) {
+                _albumSeleccionado.value = null
+            } else {
+                _albumSeleccionado.value = repository.get(albumId).toAlbum().toAlbumUiState()
+            }
         }
     }
 
@@ -57,6 +61,7 @@ class AlbumesViewModel @Inject constructor(
     private fun updateAlbum(album: AlbumUiState) {
         viewModelScope.launch {
             repository.update(album.toAlbum())
+            _albumSeleccionado.value = null
             getAllAlbumes()
         }
     }
@@ -64,6 +69,7 @@ class AlbumesViewModel @Inject constructor(
     private fun deleteAlbum(album: AlbumUiState) {
         viewModelScope.launch {
             repository.delete(album.toAlbum())
+            _albumSeleccionado.value = null
             getAllAlbumes()
         }
     }

@@ -9,10 +9,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun CancionesScreen(
-    pantalla: Int,
-    listaCanciones: List<CancionUiState>,
-    onThemeChange: (Boolean) -> Unit,
-    isDarkTheme: Boolean
+    listaCanciones: List<CancionUiState>
 ) {
     Column() {
         Text("Canciones")

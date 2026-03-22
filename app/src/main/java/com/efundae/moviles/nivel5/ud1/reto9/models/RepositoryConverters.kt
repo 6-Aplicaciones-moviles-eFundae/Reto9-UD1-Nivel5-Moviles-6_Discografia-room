@@ -8,6 +8,7 @@ import com.efundae.moviles.nivel5.ud1.reto9.data.room.discografia.cancion.Cancio
 fun Album.toAlbumEntity() = AlbumEntity(
     id = this.id,
     nombre = this.nombre,
+    artista = this.artista,
     year = this.year,
     genero = this.genero,
     portada = this.portada
@@ -16,6 +17,7 @@ fun Album.toAlbumEntity() = AlbumEntity(
 fun AlbumEntity.toAlbum() = Album(
     id = this.id,
     nombre = this.nombre,
+    artista = this.artista,
     year = this.year,
     genero = this.genero,
     portada = this.portada

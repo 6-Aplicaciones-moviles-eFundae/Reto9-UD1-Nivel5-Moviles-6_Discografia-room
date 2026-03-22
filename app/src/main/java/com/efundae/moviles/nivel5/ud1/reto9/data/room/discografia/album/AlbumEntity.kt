@@ -8,6 +8,7 @@ data class AlbumEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val nombre : String,
+    val  artista : String,
     val year : Short,
     val genero : String,
     val portada : String

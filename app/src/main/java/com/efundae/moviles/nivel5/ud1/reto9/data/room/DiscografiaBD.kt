@@ -11,7 +11,7 @@ import com.efundae.moviles.nivel5.ud1.reto9.data.room.discografia.cancion.Cancio
 
 @Database(
     entities = [AlbumEntity::class, CancionEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class DiscografiaBD : RoomDatabase() {

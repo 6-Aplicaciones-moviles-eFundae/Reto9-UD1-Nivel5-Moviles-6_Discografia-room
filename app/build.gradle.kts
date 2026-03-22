@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.ksp
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -67,6 +69,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.compose)
+    ksp(libs.ksp)
 
     implementation(libs.pmdm.ies.balmis.components)
     implementation(libs.pmdm.ies.balmis.utilities)
