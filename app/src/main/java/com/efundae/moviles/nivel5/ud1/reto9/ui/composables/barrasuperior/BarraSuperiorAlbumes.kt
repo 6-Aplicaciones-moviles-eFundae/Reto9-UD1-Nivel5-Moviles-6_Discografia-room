@@ -15,6 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes.AlbumEvent
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes.AlbumUiState
 
@@ -25,10 +26,19 @@ fun BarraSuperiorAlbumes(
     onThemeChange: (Boolean) -> Unit,
     comportamientoAnteScroll: TopAppBarScrollBehavior,
     albumSeleccionado: AlbumUiState?,
-    onAlbumEvent: (AlbumEvent) -> Unit
+    onAlbumEvent: (AlbumEvent) -> Unit,
+    onMostrarDialogoEliminarAlbum: (Boolean) -> Unit,
+    onMostrarDialogoEditarAlbum: (Boolean) -> Unit
 ) {
     TopAppBar(
-        title = { Text("Álbumes") },
+        title = {
+            Text(
+                text = "Álbumes",
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+        },
         scrollBehavior = comportamientoAnteScroll,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -47,7 +57,7 @@ fun BarraSuperiorAlbumes(
                     }
                 )
                 IconButton(
-                    onClick = {},
+                    onClick = { onMostrarDialogoEditarAlbum(true) },
                     content = {
                         Icon(
                             imageVector = Icons.Filled.Edit,
@@ -57,7 +67,7 @@ fun BarraSuperiorAlbumes(
                     }
                 )
                 IconButton(
-                    onClick = { onAlbumEvent(AlbumEvent.OnDeleteAlbum(albumUiState = albumSeleccionado)) },
+                    onClick = { onMostrarDialogoEliminarAlbum(true) },
                     content = {
                         Icon(
                             imageVector = Icons.Filled.Delete,

@@ -24,6 +24,8 @@ import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior.BarraSu
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.barrasuperior.BarraSuperiorCanciones
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BarraInferior
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.BotonFlotante
+import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoEditarAlbum
+import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoEliminarAlbum
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoInsertarAlbum
 import com.efundae.moviles.nivel5.ud1.reto9.ui.composables.dialogos.DialogoInsertarCancion
 import com.efundae.moviles.nivel5.ud1.reto9.ui.features.albumes.AlbumesViewModel
@@ -55,6 +57,12 @@ fun NavHostPrincipal(
     val (mostrarDialogoInsertarAlbum, onMostrarDialogoInsertarAlbum) = remember {
         mutableStateOf(value = false)
     }
+    val (mostrarDialogoEditarAlbum, onMostrarDialogoEditarAlbum) = remember {
+        mutableStateOf(value = false)
+    }
+    val (mostrarDialogoEliminarAlbum, onMostrarDialogoEliminarAlbum) = remember {
+        mutableStateOf(value = false)
+    }
     val (mostrarDialogoInsertarCancion, onMostrarDialogoInsertarCancion) = remember {
         mutableStateOf(value = false)
     }
@@ -70,7 +78,9 @@ fun NavHostPrincipal(
                     onThemeChange = onThemeChange,
                     comportamientoAnteScroll = comportamientoAnteScroll,
                     albumSeleccionado = albumSeleccionado,
-                    onAlbumEvent = albumVM::onAlbumEvent
+                    onAlbumEvent = albumVM::onAlbumEvent,
+                    onMostrarDialogoEliminarAlbum = onMostrarDialogoEliminarAlbum,
+                    onMostrarDialogoEditarAlbum = onMostrarDialogoEditarAlbum
                 )
 
                 1 -> BarraSuperiorCanciones(
@@ -92,9 +102,7 @@ fun NavHostPrincipal(
                 onMostrarDialogo = {
                     when (iOpcionNavegacionSeleccionada) {
                         0 -> onMostrarDialogoInsertarAlbum(it)
-                        1 -> {
-                            onMostrarDialogoInsertarCancion(it)
-                        }
+                        1 -> onMostrarDialogoInsertarCancion(it)
                     }
                 }
             )
@@ -105,6 +113,24 @@ fun NavHostPrincipal(
         if (mostrarDialogoInsertarAlbum) {
             DialogoInsertarAlbum(
                 onMostrarDialogoInsertarAlbum,
+                albumVM::onAlbumEvent,
+                snackbarHostState,
+                scope
+            )
+        }
+        if (mostrarDialogoEliminarAlbum && albumSeleccionado != null) {
+            DialogoEliminarAlbum(
+                onMostrarDialogoEliminarAlbum,
+                albumVM::onAlbumEvent,
+                snackbarHostState,
+                scope,
+                albumSeleccionado!!
+            )
+        }
+        if (mostrarDialogoEditarAlbum && albumSeleccionado != null) {
+            DialogoEditarAlbum(
+                onMostrarDialogoEditarAlbum,
+                albumSeleccionado!!,
                 albumVM::onAlbumEvent,
                 snackbarHostState,
                 scope

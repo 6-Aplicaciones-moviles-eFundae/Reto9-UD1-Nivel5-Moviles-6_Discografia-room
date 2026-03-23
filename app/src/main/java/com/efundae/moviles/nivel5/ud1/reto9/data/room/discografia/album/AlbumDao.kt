@@ -9,7 +9,7 @@ import androidx.room.Update
 
 @Dao
 interface AlbumDao {
-    @Query(value = "SELECT * FROM albumes")
+    @Query(value = "SELECT * FROM albumes ORDER BY year ASC")
     suspend fun getAll(): List<AlbumEntity>
     @Query(value = "SELECT * FROM albumes WHERE id = :id")
     suspend fun getById(id: Int): AlbumEntity
